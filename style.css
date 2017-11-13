@@ -1,0 +1,35 @@
+body {
+	background-color: #333333;
+}
+
+h1 {
+	color: white;
+	text-align: center;
+}
+
+h2 {
+	color: red;
+	margin-bottom: 3px;
+	font-size: 15px;
+}
+
+.bar-label {
+	fill: #FFA500;
+}
+
+#list {
+	margin-top: 0px;
+	margin-bottom: 30px;
+}
+
+#blu {
+	color: #007FFF;
+}
+
+#red {
+	color: #ff6666;
+}
+
+#ora {
+	color: #FFA500;
+}
