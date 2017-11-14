@@ -9,15 +9,26 @@
     window.onload = function() {
         retrieveData();
         document.getElementById("list").onchange = countrySelect;
+        document.getElementById("list2").onchange = yearSelect;
     };
 
+    // Gets country value and uses it to retrieve prevalance data.
     function countrySelect() {
         var list = document.getElementById("list");
         country = list.value;
         retrieveData();
     }
 
-    // Gets prevalance percentage of selected country and year for males.
+    // Gets year value and uses it to retrieve prevalance data.
+    function yearSelect() {
+        var list = document.getElementById("list2");
+        year = list.value;
+        var yearText = document.getElementById("year");
+        yearText.innerHTML = year + "";
+        retrieveData();
+    }
+1
+    // Gets prevalance percentage for selected country / year for males.
     function retrieveData() {
         d3.select("svg").remove();
         d3.csv("dataset.csv", function(data) {
@@ -52,9 +63,10 @@
             }
                       
             var w = 500;
-            var h = 450;
+            var h = 320;
             var data = [0, 1, 2];
 
+            // Is a x/y scaler tool, to create a relative bar graph.
             var xScale = d3.scaleLinear()
                 .domain([0, d3.max(ageGroups)])
                 .range([0,w-100]);
@@ -62,6 +74,7 @@
                 .domain([0,ageGroups.length])
                 .range([0,h]);
 
+            // Creates canvas for svg object.
             var svg = d3.select("div").append("svg")
                 .attr("height", h)
                 .attr("width", w);
@@ -85,6 +98,7 @@
                             return yScale(1)-1;
                         })
 
+                // Creates text labels (percentage) for bars.
                 svg.selectAll(".bar-label")
                     .data(ageGroups)
                     .enter()
@@ -103,6 +117,7 @@
                             return d + "%";
                         });
 
+                // Creates "age range" text label.
                 var age = 10;
                 svg.selectAll(".bar-age")
                     .data(ageGroups)
